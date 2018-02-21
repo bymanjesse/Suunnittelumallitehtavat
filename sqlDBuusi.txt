@@ -1,0 +1,100 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(100) NOT NULL,
+  `description` text NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `employees` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(100) NOT NULL,
+  `lastname` varchar(100) NOT NULL,
+  `username` varchar(40) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `phone` varchar(100) NOT NULL,
+  `address` text NOT NULL,
+  `type` enum('admin','employee') NOT NULL DEFAULT 'employee',
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `laskut` (
+  `id` varchar(13) NOT NULL,
+  `employeeId` int(11) NOT NULL,
+  `total` double NOT NULL,
+  `vat` double NOT NULL,
+  `discount` double NOT NULL,
+  `payable` double NOT NULL,
+  `paid` double NOT NULL,
+  `returned` double NOT NULL,
+  `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `categoryId` int(11) NOT NULL,
+  `supplierId` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `price` double NOT NULL,
+  `quantity` double NOT NULL,
+  `description` text NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `purchases` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `productId` int(11) NOT NULL,
+  `supplierId` int(11) NOT NULL,
+  `quantity` double NOT NULL,
+  `price` double NOT NULL,
+  `total` double NOT NULL,
+  `datetime` datetime DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `sales` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `laskuId` varchar(13) NOT NULL,
+  `productId` int(11) NOT NULL,
+  `quantity` double NOT NULL,
+  `price` int(11) NOT NULL,
+  `total` double NOT NULL,
+  `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `suppliers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `phone` varchar(100) NOT NULL,
+  `address` text NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+ALTER TABLE `products`
+  ADD KEY `categoryId` (`categoryId`),
+ADD KEY `supplierId` (`supplierId`);
+
+ALTER TABLE `purchases`
+  ADD KEY `productId` (`productId`),
+ADD KEY `supplierId` (`supplierId`);
+
+ALTER TABLE `sales`
+  ADD KEY `productId` (`productId`),
+ADD KEY `laskuId` (`laskuId`);
+
+
+INSERT INTO `employees` (`id`, `firstname`, `lastname`, `username`, `password`, `phone`, `address`, `type`) VALUES
+(1, 'john', 'cena', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', '0099887766', 'New York, USA', 'admin'),
+(2, 'Martha', 'Jones', 'user', '12dea96fec20593566ab75692c9949596833adc9', '123456789', 'Seattle', 'employee');
