@@ -8,6 +8,8 @@ package com.mycompany.varasto;
 /**
  *
  * @author aleks
+ * 
+ * 
  */
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
