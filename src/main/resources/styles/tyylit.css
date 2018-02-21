@@ -1,0 +1,14 @@
+
+.search-field {
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right center;
+}
+.pohja{
+    -fx-background-color: #5F9EA0;
+}
+.sidebar-menu{
+    -fx-background-color: #5F9EA0;
+}
+.open-menu {
+    -fx-background-color: #5F9EA0;
+}

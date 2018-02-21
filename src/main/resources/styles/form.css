@@ -1,0 +1,15 @@
+.vBox-background {
+        -fx-background-color: #5F9EA0;
+}
+.top-bar, .header, .bottom-bar {
+        -fx-background-color: #5F9EA0;
+}
+
+.header-label{
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 50;
+}
+
+.vbox-body {
+        -fx-background-color: #5F9EA0;
+}

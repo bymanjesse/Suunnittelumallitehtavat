@@ -1,0 +1,45 @@
+.box{
+        -fx-background-color: #5F9EA0;
+}
+
+.tagline{
+    -fx-font-family: Century Gothic;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 18px;
+}
+
+.sign-in{
+    -fx-font-family: Century Gothic;
+    -fx-text-fill: rgba(231,231,222,1);
+    -fx-font-size: 18;
+}
+
+.error-message {
+    -fx-font-family: Century Gothic;
+    -fx-text-fill: #ff3333;
+    -fx-font-size: 18;
+}
+
+.text-field {
+    -fx-font-family: Consolas;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 18;
+}
+.sign-in{
+    -fx-font-family: Century Gothic;
+    -fx-text-fill: rgba(231,231,222,1);
+    -fx-font-size: 18;
+}
+
+.error-message {
+    -fx-font-family: Century Gothic;
+    -fx-text-fill: #ff3333;
+    -fx-font-size: 18;
+}
+
+.text-field {
+    -fx-font-family: Consolas;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 18;
+    -fx-background-color: rgba(0, 88, 122, 1);
+}

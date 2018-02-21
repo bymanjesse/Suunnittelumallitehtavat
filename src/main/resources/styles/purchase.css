@@ -1,0 +1,11 @@
+.vBox-background {
+        -fx-background-color: #5F9EA0;
+}
+.header{
+        -fx-background-color: #5F9EA0;
+}
+
+.header-label{
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 40px;
+}
