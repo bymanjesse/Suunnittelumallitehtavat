@@ -78,7 +78,6 @@ public class LaskuController implements Initializable {
                     employeeModel.getEmployee(2),
                     payment.getSubTotal(),
                     payment.getVat(),
-                    payment.getDiscount(),
                     payment.getPayable(),
                     paid,
                     retail

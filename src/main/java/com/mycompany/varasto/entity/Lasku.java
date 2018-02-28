@@ -37,8 +37,6 @@ public class Lasku implements Serializable {
     private double total;
     @Column(name = "vat")
     private double vat;
-    @Column(name = "discount")
-    private double discount;
     @Column(name = "payable")
     private double payable;
     @Column(name = "paid")
@@ -53,12 +51,11 @@ public class Lasku implements Serializable {
     }
 
     public Lasku(String id, Employee employee, double total, double vat, 
-            double discount, double payable, double paid, double returned, String date) {
+            double payable, double paid, double returned, String date) {
         this.id = id;
         this.employee = employee;
         this.total = total;
         this.vat = vat;
-        this.discount = discount;
         this.payable = payable;
         this.paid = paid;
         this.returned = returned;
@@ -66,12 +63,11 @@ public class Lasku implements Serializable {
     }
 
     public Lasku(String id, Employee employee, double total, double vat, 
-            double discount, double payable, double paid, double returned) {
+            double payable, double paid, double returned) {
         this.id = id;
         this.employee = employee;
         this.total = total;
         this.vat = vat;
-        this.discount = discount;
         this.payable = payable;
         this.paid = paid;
         this.returned = returned;
@@ -109,13 +105,6 @@ public class Lasku implements Serializable {
         this.vat = vat;
     }
 
-    public double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
-    }
 
     public double getPayable() {
         return payable;

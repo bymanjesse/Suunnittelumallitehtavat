@@ -15,13 +15,12 @@ public class Payment {
     
     private double subTotal;
     private double vat;
-    private double discount;
+
     private double payable;
 
-    public Payment(double subTotal, double vat, double discount, double payable) {
+    public Payment(double subTotal, double vat, double payable) {
         this.subTotal = subTotal;
         this.vat = vat;
-        this.discount = discount;
         this.payable = payable;
     }
 
@@ -39,14 +38,6 @@ public class Payment {
 
     public void setVat(double vat) {
         this.vat = vat;
-    }
-
-    public double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
     }
 
     public double getPayable() {

@@ -60,7 +60,7 @@ public class TyontekijaController implements Initializable, ProductInterface {
     @FXML
     private TextArea descriptionArea;
     @FXML
-    private TextField subTotalField, discountField, vatField, netPayableField;
+    private TextField subTotalField, vatField, netPayableField;
     @FXML
     private Button addButton, removeButton, paymentButton;
     @FXML
@@ -239,7 +239,7 @@ public class TyontekijaController implements Initializable, ProductInterface {
             // ja 5 euron  alennus vaan ihan huvin vuoksi, jossain vaiheessa voisi laittaa että ötuon discountin saisi suorana guista 
             // en ole vielä sitä vaan tehnyt
             // esimerkki meni näin ja tein sitten niin
-            double netPayablePrice = (double) (Math.abs((subTotalPrice + vat) - 5));
+            double netPayablePrice = (double) (Math.abs((subTotalPrice + vat)));
 
             subTotalField.setText(String.valueOf(subTotalPrice));
             vatField.setText(String.valueOf(vat));
@@ -253,7 +253,6 @@ public class TyontekijaController implements Initializable, ProductInterface {
         Payment payment = new Payment(
                 Double.parseDouble(subTotalField.getText().trim()),
                 Double.parseDouble(vatField.getText().trim()),
-                Double.parseDouble(discountField.getText().trim()),
                 Double.parseDouble(netPayableField.getText().trim())
         );
         // haetaan tavarat listasta 
