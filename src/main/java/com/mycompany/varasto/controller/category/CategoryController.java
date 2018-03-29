@@ -95,7 +95,7 @@ public class CategoryController implements Initializable, CategoryInterface {
         // tämä on suoraan erimerkistä vedettu ja vaihdettu vaan esim esimerkistä muutujia esim CATEGORYLIST categorytable jne
         // Wraps an ObservableList and filters it's content using the provided Predicate. 
         // All changes in the ObservableList are propagated immediately to the FilteredList.
-        // Tuossa pieni pätkä joka ehkä auttaa ymmärtämään. 
+        // Tuossa pieni pätkä joka ehkä auttaa ymmärtämään.
         // ottaa siis searchfieldin inputin ja vertaa Categorylistaan 
         
         FilteredList<Category> searchedData = new FilteredList<>(CATEGORYLIST, e -> true);
