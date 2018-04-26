@@ -9,6 +9,8 @@ package com.mycompany.varasto;
  *
  * @author aleks
  */
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.application.Platform;
@@ -24,16 +26,27 @@ public class MainApp extends Application {
 
     private double xOffset = 0;
     private double yOffset = 0;
+    ResourceBundle messages;
+    
+    public void init(){
+        Locale currentlocale;
+        String language ="fi";
+        String country ="FI";
+        currentlocale = new Locale(language, country);
+        messages = ResourceBundle.getBundle("MessageBundle_fi_FI" , currentlocale);
+    }
 
     
     // main classi avaa login scteenin
     @Override
     public void start(Stage stage) throws Exception {
+        
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
         root.setOnMousePressed((MouseEvent event) -> {
             xOffset = event.getSceneX();
             yOffset = event.getSceneY();
         });
+        
         
         // asettaa stagen koon mousedraggaamällä
         root.setOnMouseDragged((MouseEvent event) -> {
@@ -41,7 +54,7 @@ public class MainApp extends Application {
             stage.setY(event.getScreenY() - yOffset);
         });
         Scene scene = new Scene(root);
-        stage.setTitle("Inventory:: Version 1.0");
+        stage.setTitle("Varasto");
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();

@@ -12,6 +12,7 @@ package com.mycompany.varasto.controller.login;
  */
 import com.mycompany.varasto.model.EmployeeModel;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -37,11 +38,14 @@ public class LoginController implements Initializable {
     @FXML
     private Label errorLabel;
     private EmployeeModel model;
+    ResourceBundle messages;
 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         model = new EmployeeModel();
+        messages = ResourceBundle
+        .getBundle("MessageBundle_fi_FI", new Locale("fi", "FI"));
         // kuunnellan mitä kirjoitetaan 
         enterPressed();
     }
@@ -94,7 +98,7 @@ public class LoginController implements Initializable {
                     // kirjaudutaan joko admin tai employee ruutuun
                     switch (type) {
                         case "admin":
-                            windows("/fxml/Admin.fxml", "Admin Panel");
+                            windows("/fxml/Admin.fxml", messages.getString("asd"));
                             break;
 
                         case "employee":

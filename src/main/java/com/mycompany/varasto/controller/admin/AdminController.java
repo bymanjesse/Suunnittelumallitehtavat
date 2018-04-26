@@ -13,6 +13,7 @@ package com.mycompany.varasto.controller.admin;
 import com.mycompany.varasto.entity.Product;
 import com.mycompany.varasto.model.ProductModel;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
@@ -38,6 +39,7 @@ public class AdminController implements Initializable {
 
     private double xOffset = 0;
     private double yOffset = 0;
+
     
     // fxml muuttujat
     @FXML
@@ -52,13 +54,14 @@ public class AdminController implements Initializable {
     @FXML
     CategoryAxis pxAxis;
     
-
+    ResourceBundle messages;
     private ProductModel productModel;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle rb) {
 
         productModel = new ProductModel();
+        messages = ResourceBundle.getBundle("MessageBundle_fi_FI", new Locale("fi", "FI"));
         // luodaan charttit admin ruutuun 
         drawerAction();
         loadProductsChart();
@@ -175,5 +178,6 @@ public class AdminController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    
 }
 
