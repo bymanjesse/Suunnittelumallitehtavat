@@ -43,6 +43,7 @@ public class LaskuController implements Initializable {
     private SalesModel salesModel;
     private LaskuModel laskuModel;
     private Payment payment;
+    private ResourceBundle rb;
 
     private double xOffset = 0;
     private double yOffset = 0;
@@ -50,6 +51,7 @@ public class LaskuController implements Initializable {
     //
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.rb = rb;
         productModel = new ProductModel();
         employeeModel = new EmployeeModel();
         salesModel = new SalesModel();
@@ -112,17 +114,17 @@ public class LaskuController implements Initializable {
         String errorMessage = "";
 
         if (paidAmountField.getText() == null || paidAmountField.getText().length() == 0) {
-            errorMessage += "Invalid Input!\n";
+            errorMessage += rb.getString("invalidInput") + "\n";
         } else if (Double.parseDouble(paidAmountField.getText()) < netPrice) {
-            errorMessage += "Insufficient Input!\n";
+            errorMessage += rb.getString("InsufInput") + "\n";
         }
 
         if (errorMessage.length() == 0) {
             return true;
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning");
-            alert.setHeaderText("Please input the valid amount");
+            alert.setTitle(rb.getString("warn"));
+            alert.setHeaderText(rb.getString("amount"));
             alert.setContentText(errorMessage);
             alert.showAndWait();
             paidAmountField.setText("");

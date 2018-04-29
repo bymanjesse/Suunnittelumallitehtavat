@@ -26,42 +26,45 @@ public class MainApp extends Application {
 
     private double xOffset = 0;
     private double yOffset = 0;
-    ResourceBundle messages;
-    
-    public void init(){
-        Locale currentlocale;
-        String language ="fi";
-        String country ="FI";
-        currentlocale = new Locale(language, country);
-        messages = ResourceBundle.getBundle("MessageBundle_fi_FI" , currentlocale);
-    }
 
     
-    // main classi avaa login scteenin
+
+    
+   
     @Override
     public void start(Stage stage) throws Exception {
+        String language ="en";
+        String country ="EN";
         
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
+        Locale currentlocale = new Locale(language, country);
+        ResourceBundle rb = ResourceBundle.getBundle("MessageBundle_en_EN" , currentlocale);
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"), rb);
         root.setOnMousePressed((MouseEvent event) -> {
             xOffset = event.getSceneX();
             yOffset = event.getSceneY();
         });
         
         
-        // asettaa stagen koon mousedraggaamällä
         root.setOnMouseDragged((MouseEvent event) -> {
             stage.setX(event.getScreenX() - xOffset);
             stage.setY(event.getScreenY() - yOffset);
         });
         Scene scene = new Scene(root);
-        stage.setTitle("Varasto");
+        stage.setTitle(rb.getString("v1"));
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
+        ResourceBundle rb;
+        Locale currentlocale;
+        String language ="en";
+        String country ="EN";
         
+        currentlocale = new Locale(language, country);
+        
+        rb = ResourceBundle.getBundle("MessageBundle_en_EN" , currentlocale);
         // aloitetaan sessio
         if (HibernateUtil.setSessionFactory()) {
             launch(args);
@@ -70,9 +73,9 @@ public class MainApp extends Application {
             // virhetapahtumat eli jos tietokantayhteys ei pelaa
             Platform.runLater(() -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("An error has occured!");
-                alert.setHeaderText("Database Connection Error!");
-                alert.setContentText("Please contact the developer");
+                alert.setTitle(rb.getString("error"));
+                alert.setHeaderText(rb.getString("dberror"));
+                alert.setContentText(rb.getString("contactD"));
                 alert.showAndWait();
                 Platform.exit();
             });

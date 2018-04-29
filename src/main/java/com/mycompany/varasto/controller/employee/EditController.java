@@ -40,10 +40,12 @@ public class EditController implements Initializable, EmployeeInterface {
     private long selectedEmployeeId;
     private EmployeeModel employeeModel;
     private Employee employee;
+    private ResourceBundle rb;
     
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle rb) {
         employeeModel = new EmployeeModel();
+        this.rb = rb;
         resetValues();
     }
 
@@ -74,9 +76,9 @@ public class EditController implements Initializable, EmployeeInterface {
             ((Stage) saveButton.getScene().getWindow()).close();
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Successful");
-            alert.setHeaderText("Employee Updated!");
-            alert.setContentText("Employee is updated successfully");
+            alert.setTitle(rb.getString("successful"));
+            alert.setHeaderText(rb.getString("emplyeeUpdated"));
+            alert.setContentText(rb.getString("emplyeeUpSuc"));
             alert.showAndWait();
         }
     }
@@ -109,35 +111,35 @@ public class EditController implements Initializable, EmployeeInterface {
         String errorMessage = "";
 
         if (firstField.getText() == null || firstField.getText().length() == 0) {
-            errorMessage += "No valid first name!\n";
+            errorMessage += rb.getString("noFName") + "\n";
         }
 
         if (lastField.getText() == null || lastField.getText().length() == 0) {
-            errorMessage += "No valid last name!\n";
+            errorMessage += rb.getString("NoLastName") + "\n";
         }
 
         if (usernameField.getText() == null || usernameField.getText().length() == 0) {
-            errorMessage += "No valid username!\n";
+            errorMessage += rb.getString("NoUser") + "\n"; 
         }
 
         if (passwordField.getText() == null || passwordField.getText().length() == 0) {
-            errorMessage += "No valid password!\n";
+            errorMessage += rb.getString("NoPassword") + "\n"; 
         }
 
         if (phoneField.getText() == null || phoneField.getText().length() == 0) {
-            errorMessage += "No valid phone number!\n";
+            errorMessage += rb.getString("NoPassword") + "\n"; 
         }
 
         if (addressArea.getText() == null || addressArea.getText().length() == 0) {
-            errorMessage += "No email address!\n";
+            errorMessage += rb.getString("noEmailAddress") + "\n";  
         }
 
         if (errorMessage.length() == 0) {
             return true;
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
+            alert.setTitle(rb.getString("invalidF"));
+            alert.setHeaderText(rb.getString("correctInvalidF"));
             alert.setContentText(errorMessage);
             alert.showAndWait();
 

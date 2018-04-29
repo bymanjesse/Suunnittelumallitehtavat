@@ -63,20 +63,21 @@ public class EmployeeController implements Initializable, EmployeeInterface {
     private Button menu;
     @FXML
     private VBox drawer;
-
+    private ResourceBundle rb;
     @Override
     // ladataan ikkuna
     // lue categoryControllien kommentit ovat samanliaset
     // mutta muutettu vain Category employees ja joitan muita pieniä muutoksia GUI hin
     // 
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle rb) {
         model = new EmployeeModel();
+        this.rb = rb;
 
         drawerAction();
         loadData();
 
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        firstnameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        firstnameColumn.setCellValueFactory(new PropertyValueFactory<>("firstname"));
         lastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
         passwordColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
@@ -151,49 +152,51 @@ public class EmployeeController implements Initializable, EmployeeInterface {
         });
     }
 
+
     @FXML
     public void adminAction(ActionEvent event) throws Exception {
-        windows("/fxml/Admin.fxml", "Admin", event);
+        windows("/fxml/Admin.fxml", rb.getString("administrator"), event, rb);
     }
 
     @FXML
     public void productAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Product.fxml", "Product", event);
+        windows("/fxml/Product.fxml", rb.getString("product"), event, rb);
     }
 
     @FXML
     public void categoryAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Category.fxml", "Category", event);
+        windows("/fxml/Category.fxml", rb.getString("category"), event, rb);
     }
 
     @FXML
     public void purchaseAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Purchase.fxml", "Purchase", event);
+        windows("/fxml/Purchase.fxml", rb.getString("purchase"), event, rb);
     }
 
     @FXML
     public void salesAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Sales.fxml", "Sales", event);
+        windows("/fxml/Sales.fxml", rb.getString("sales"), event, rb);
     }
 
     @FXML
     public void reportAction(ActionEvent event) throws Exception {
-        windows("/fxml/Report.fxml", "Report", event);
+        windows("/fxml/Report.fxml", rb.getString("report"), event, rb);
     }
 
     @FXML
     public void supplierAction(ActionEvent event) throws Exception {
-        windows("/fxml/Supplier.fxml", "Supplier", event);
+        windows("/fxml/Supplier.fxml", rb.getString("supplier"), event, rb);
     }
 
+    
     @FXML
     public void logoutAction(ActionEvent event) throws Exception {
         ((Node) (event.getSource())).getScene().getWindow().hide();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"), rb);
         Stage stage = new Stage();
         root.setOnMousePressed((MouseEvent e) -> {
             xOffset = e.getSceneX();
@@ -211,12 +214,12 @@ public class EmployeeController implements Initializable, EmployeeInterface {
 
     }
 
-    private void windows(String path, String title, ActionEvent event) throws Exception {
+    private void windows(String path, String title, ActionEvent event, ResourceBundle rb) throws Exception {
 
         double width = ((Node) event.getSource()).getScene().getWidth();
         double height = ((Node) event.getSource()).getScene().getHeight();
 
-        Parent root = FXMLLoader.load(getClass().getResource(path));
+        Parent root = FXMLLoader.load(getClass().getResource(path), rb);
         Scene scene = new Scene(root, width, height);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle(title);
@@ -226,7 +229,7 @@ public class EmployeeController implements Initializable, EmployeeInterface {
 
     public void addAction(ActionEvent event) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/employee/Add.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/employee/Add.fxml"), rb);
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         root.setOnMousePressed((MouseEvent e) -> {
@@ -249,7 +252,7 @@ public class EmployeeController implements Initializable, EmployeeInterface {
 
         Employee selectedEmployee = employeeTable.getSelectionModel().getSelectedItem();
         int selectedEmployeeId = employeeTable.getSelectionModel().getSelectedIndex();
-        FXMLLoader loader = new FXMLLoader((getClass().getResource("/fxml/employee/Edit.fxml")));
+        FXMLLoader loader = new FXMLLoader((getClass().getResource("/fxml/employee/Edit.fxml")), rb);
         EditController controller = new EditController();
         loader.setController(controller);
         Parent root = loader.load();

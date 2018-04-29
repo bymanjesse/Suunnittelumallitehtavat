@@ -37,11 +37,12 @@ public class EditController implements Initializable, CategoryInterface {
     private Button saveButton;
     private CategoryModel categoryModel;
     private Category category;
-
+    private ResourceBundle rb;
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle rb) {
         // luodaan uusi category model ja tyhjennetään kentät
         categoryModel = new CategoryModel();
+        this.rb = rb;
         resetValues();
     }
     // astetaan categoria
@@ -69,9 +70,9 @@ public class EditController implements Initializable, CategoryInterface {
             ((Stage) saveButton.getScene().getWindow()).close();
             
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Successful");
-            alert.setHeaderText("Category Updated!");
-            alert.setContentText("Category is updated successfully");
+            alert.setTitle(rb.getString("successful"));
+            alert.setHeaderText(rb.getString("categoryUpdated"));
+            alert.setContentText(rb.getString("categoryUpdated2"));
             alert.showAndWait();
         }
     }
@@ -96,19 +97,19 @@ public class EditController implements Initializable, CategoryInterface {
         String errorMessage = "";
 
         if (typeField.getText() == null || typeField.getText().length() == 0) {
-            errorMessage += "No valid name!\n";
+            errorMessage += rb.getString("categorynoname") + "\n";
         }
 
         if (descriptionArea.getText() == null || descriptionArea.getText().length() == 0) {
-            errorMessage += "No email description!\n";
+            errorMessage += rb.getString("noDes") + "\n";
         }
 
         if (errorMessage.length() == 0) {
             return true;
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
+            alert.setTitle(rb.getString("invalidF"));
+            alert.setHeaderText(rb.getString("correctInvalidF"));
             alert.setContentText(errorMessage);
             alert.showAndWait();
 

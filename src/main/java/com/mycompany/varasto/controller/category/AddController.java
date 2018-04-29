@@ -35,13 +35,15 @@ public class AddController implements Initializable, CategoryInterface {
     @FXML
     private Button saveButton;
     private CategoryModel categoryModel;
+    private ResourceBundle rb;
 
     
     // luodaan ikkunan avauksessa uusi category model jotta saadaan siirettyä sen avulla 
     // dataa tietokantaan
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle rb) {
         categoryModel = new CategoryModel();
+        this.rb = rb;
     }
     // cancel napin event handler
     @FXML
@@ -68,9 +70,9 @@ public class AddController implements Initializable, CategoryInterface {
             ((Stage) saveButton.getScene().getWindow()).close();
             // ilmoitus onnistumisesta
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Successful");
-            alert.setHeaderText("Category Created!");
-            alert.setContentText("Category is created successfully");
+            alert.setTitle(rb.getString("successful"));
+            alert.setHeaderText(rb.getString("category"));
+            alert.setContentText(rb.getString("categorycreated"));
             alert.showAndWait();
         }
     }
@@ -80,19 +82,19 @@ public class AddController implements Initializable, CategoryInterface {
         String errorMessage = "";
 
         if (typeField.getText() == null || typeField.getText().length() == 0) {
-            errorMessage += "No valid name!\n";
+            errorMessage += rb.getString("noname")+ "\n";
         }
 
         if (descriptionArea.getText() == null || descriptionArea.getText().length() == 0) {
-            errorMessage += "No email description!\n";
+            errorMessage += rb.getString("noemail")+ "\n";
         }
 
         if (errorMessage.length() == 0) {
             return true;
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
+            alert.setTitle(rb.getString("invalidF"));
+            alert.setHeaderText(rb.getString("correctInvalidF"));
             alert.setContentText(errorMessage);
             alert.showAndWait();
 

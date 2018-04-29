@@ -10,7 +10,9 @@ package com.mycompany.varasto.controller.login;
  * @author aleks
  * 
  */
+
 import com.mycompany.varasto.model.EmployeeModel;
+import java.beans.PropertyChangeEvent;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -37,15 +39,15 @@ public class LoginController implements Initializable {
     private TextField usernameField, passwordField;
     @FXML
     private Label errorLabel;
+    private Label signin;
     private EmployeeModel model;
-    ResourceBundle messages;
-
+    ResourceBundle rb;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         model = new EmployeeModel();
-        messages = ResourceBundle
-        .getBundle("MessageBundle_fi_FI", new Locale("fi", "FI"));
+        this.rb = rb;
         // kuunnellan mitä kirjoitetaan 
         enterPressed();
     }
@@ -98,28 +100,27 @@ public class LoginController implements Initializable {
                     // kirjaudutaan joko admin tai employee ruutuun
                     switch (type) {
                         case "admin":
-                            windows("/fxml/Admin.fxml", messages.getString("asd"));
+                            windows("/fxml/Admin.fxml", rb.getString("administrator"), rb);
                             break;
 
                         case "employee":
-                            windows("/fxml/Tyontekija.fxml", "Point of Sales");
+                            windows("/fxml/Tyontekija.fxml", rb.getString("tyontekija"), rb);
                             break;
                     }
                 } else {
                     // muuten virheilmoitukset mkä meni vikaan
                     passwordField.setText("");
-                    errorLabel.setText("Wrong Password!");
+                    errorLabel.setText(rb.getString("wrongpw"));
                 }
             } else {
                 resetFields();
-                errorLabel.setText("User doesn't exist!");
+                errorLabel.setText(rb.getString("usernex"));
             }
         }
     }
     // käytetään ikkunan avaamiseen
-    private void windows(String path, String title) throws Exception {
-
-        Parent root = FXMLLoader.load(getClass().getResource(path));
+    private void windows(String path, String title, ResourceBundle rb) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource(path), rb);
         Stage stage = new Stage();
         Scene scene = new Scene(root);
         stage.setTitle(title);
@@ -147,6 +148,27 @@ public class LoginController implements Initializable {
         Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
+    @FXML
+    public void ESPaction(ActionEvent event)throws Exception{
+        Locale currentlocale;
+        String language ="es";
+        String country ="BO";
+        
+        currentlocale = new Locale(language, country);
+        
+        this.rb = ResourceBundle.getBundle("MessageBundle_es_BO" , currentlocale);
+        
+    }
+        @FXML
+    public void ENaction(ActionEvent event)throws Exception{
+        Locale currentlocale;
+        String language ="en";
+        String country ="EN";
+        
+        currentlocale = new Locale(language, country);
+        this.rb = ResourceBundle.getBundle("MessageBundle_en_EN" , currentlocale);
+        
+    }
 
     private boolean validateInput() {
         
@@ -155,7 +177,7 @@ public class LoginController implements Initializable {
         String errorMessage = "";
 
         if (usernameField.getText() == null || passwordField.getText().length() == 0) {
-            errorMessage += "Please enter credentials!\n";
+            errorMessage += rb.getString("credentials") + "/n";
         }
 
         if (errorMessage.length() == 0) {
@@ -165,5 +187,6 @@ public class LoginController implements Initializable {
             return false;
         }
     }
+
 }
 

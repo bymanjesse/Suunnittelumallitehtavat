@@ -64,10 +64,11 @@ public class CategoryController implements Initializable, CategoryInterface {
     private Button menu;
     @FXML
     private VBox drawer;
-
+    private ResourceBundle rb;
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle rb) {
         model = new CategoryModel();
+        this.rb = rb;
 
         drawerAction();
         loadData();
@@ -148,50 +149,51 @@ public class CategoryController implements Initializable, CategoryInterface {
             }
         });
     }
-    // menun nappien event handlerit
-    @FXML
+  // valikkomenun buttoneiden actionit
+     @FXML
     public void adminAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Admin.fxml", "Admin", event);
+        windows("/fxml/Admin.fxml", rb.getString("administrator"), event, rb);
     }
 
     @FXML
     public void productAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Product.fxml", "Product", event);
+        windows("/fxml/Product.fxml", rb.getString("product"), event, rb);
     }
 
     @FXML
     public void purchaseAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Purchase.fxml", "Purchase", event);
+        windows("/fxml/Purchase.fxml", rb.getString("purchase"), event, rb);
     }
 
     @FXML
     public void salesAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Sales.fxml", "Sales", event);
+        windows("/fxml/Sales.fxml", rb.getString("sales"), event, rb);
     }
 
     @FXML
     public void supplierAction(ActionEvent event) throws Exception {
-        windows("/fxml/Supplier.fxml", "Supplier", event);
+        windows("/fxml/Supplier.fxml", rb.getString("supplier"), event, rb);
     }
 
     @FXML
     public void reportAction(ActionEvent event) throws Exception {
-        windows("/fxml/Report.fxml", "Report", event);
+        windows("/fxml/Report.fxml", rb.getString("report"), event, rb);
     }
 
     @FXML
     public void staffAction(ActionEvent event) throws Exception {
-        windows("/fxml/Employee.fxml", "Employee", event);
+        windows("/fxml/Employee.fxml", rb.getString("staff"), event, rb);
     }
+    
     // logout napin event handleri
     @FXML
     public void logoutAction(ActionEvent event) throws Exception {
         ((Node) (event.getSource())).getScene().getWindow().hide();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"), rb);
         Stage stage = new Stage();
         root.setOnMousePressed((MouseEvent e) -> {
             xOffset = e.getSceneX();
@@ -202,18 +204,18 @@ public class CategoryController implements Initializable, CategoryInterface {
             stage.setY(e.getScreenY() - yOffset);
         });
         Scene scene = new Scene(root);
-        stage.setTitle("Inventory:: Version 1.0");
+        stage.setTitle(rb.getString("v1"));
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
     }
     // käytetään kun ladataan uusi ikuna menu valikosta
-    private void windows(String path, String title, ActionEvent event) throws Exception {
+    private void windows(String path, String title, ActionEvent event, ResourceBundle rb) throws Exception {
 
         double width = ((Node) event.getSource()).getScene().getWidth();
         double height = ((Node) event.getSource()).getScene().getHeight();
 
-        Parent root = FXMLLoader.load(getClass().getResource(path));
+        Parent root = FXMLLoader.load(getClass().getResource(path), rb);
         Scene scene = new Scene(root, width, height);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle(title);
@@ -226,7 +228,7 @@ public class CategoryController implements Initializable, CategoryInterface {
     @FXML
     public void addAction(ActionEvent event) throws Exception {
         // avataan uusi ikkuna add.fxml.
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/category/Add.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/category/Add.fxml"), rb);
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         root.setOnMousePressed((MouseEvent e) -> {
@@ -240,7 +242,7 @@ public class CategoryController implements Initializable, CategoryInterface {
         });
         // astetaan title jne
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("New Category");
+        stage.setTitle(rb.getString("newcategory"));
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
@@ -253,7 +255,7 @@ public class CategoryController implements Initializable, CategoryInterface {
         Category selectedCategory = categoryTable.getSelectionModel().getSelectedItem();
         int selectedCategoryId = categoryTable.getSelectionModel().getSelectedIndex();
         // ladataan edit.fxml
-        FXMLLoader loader = new FXMLLoader((getClass().getResource("/fxml/category/Edit.fxml")));
+        FXMLLoader loader = new FXMLLoader((getClass().getResource("/fxml/category/Edit.fxml")), rb);
         // asetetaan controlleri näin jotta voidaan kutsua controllerista myöhemmin toista funktota (setcategory)
         // add napille on asetettu controlleri fxml tiedostossa
         EditController controller = new EditController();
@@ -273,7 +275,7 @@ public class CategoryController implements Initializable, CategoryInterface {
         });
         // asetetaan titlet jnejne
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Edit Category");
+        stage.setTitle(rb.getString("editCategory"));
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
@@ -287,9 +289,9 @@ public class CategoryController implements Initializable, CategoryInterface {
     public void deleteAction(ActionEvent event) {
         // varmistetaan käyttäjältä poisto
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Delete");
-        alert.setHeaderText("Delete Product");
-        alert.setContentText("Are you sure?");
+        alert.setTitle(rb.getString("delete"));
+        alert.setHeaderText(rb.getString("DeleteCat"));
+        alert.setContentText(rb.getString("confirmation"));
         // jos painaa ok niin poistetaan 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {

@@ -12,8 +12,8 @@
    <children>
       <Pane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="760.0" styleClass="control-background">
          <children>
-            <Button fx:id="menu" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="63.0" styleClass="menu-button" stylesheets="@../styles/tyylit.css" text="Menu" />
-            <Button layoutX="95.0" layoutY="13.0" mnemonicParsing="false" onAction="#logoutAction" prefHeight="40.0" prefWidth="78.0" styleClass="logout-button" text="Logout" />
+            <Button fx:id="menu" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="63.0" styleClass="menu-button" stylesheets="@../styles/tyylit.css" text="%menu" />
+            <Button layoutX="95.0" layoutY="13.0" mnemonicParsing="false" onAction="#logoutAction" prefHeight="40.0" prefWidth="78.0" styleClass="logout-button" text="%logout" />
          </children>
       </Pane>
       <StackPane alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="760.0" VBox.vgrow="ALWAYS">
@@ -29,14 +29,14 @@
                                     <Insets />
                                  </HBox.margin>
                                  <children>
-                                    <Label layoutX="14.0" layoutY="12.0" styleClass="hbox-title" text="Admin" />
+                                    <Label layoutX="14.0" layoutY="12.0" styleClass="hbox-title" text="%administrator" />
                                  </children>
                               </Pane>
                            </children>
                         </HBox>
                         <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="232.0" prefWidth="760.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <BarChart fx:id="productsChart" minHeight="-Infinity" minWidth="-Infinity" prefHeight="232.0" prefWidth="380.0" title="Products" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                              <BarChart fx:id="productsChart" minHeight="-Infinity" minWidth="-Infinity" prefHeight="232.0" prefWidth="380.0" title="%products" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                 <xAxis>
                                   <CategoryAxis fx:id="pxAxis" side="BOTTOM" />
                                 </xAxis>
@@ -52,19 +52,19 @@
             </HBox>
             <VBox fx:id="drawer" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="200.0" styleClass="sidebar-menu" translateX="-200.0">
                <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="Administrator">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="%administrator">
                      <styleClass>
                         <String fx:value="menu-buttons" />
                         <String fx:value="menu-buttons-selected" />
                      </styleClass>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#productAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Product" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#categoryAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Category" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#supplierAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Supplier" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#purchaseAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Purchase" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#salesAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Sales" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#staffAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Staff" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#reportAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Report" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#productAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="%product" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#categoryAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="%category" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#supplierAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="%supplier" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#purchaseAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="%purchase" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#salesAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="%sales" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#staffAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="%staff" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#reportAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="%report" />
                </children>
             </VBox>
          </children>

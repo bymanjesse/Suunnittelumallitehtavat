@@ -36,9 +36,9 @@ public class EditController implements Initializable, SupplierInterface {
     private long selectedSupplierId;
     private SupplierModel supplierModel;
     private Supplier supplier;
-
+    private ResourceBundle rb;
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle rb) {
         supplierModel = new SupplierModel();
         resetValues();
     }
@@ -85,9 +85,9 @@ public class EditController implements Initializable, SupplierInterface {
             ((Stage) saveButton.getScene().getWindow()).close();
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Successful");
-            alert.setHeaderText("Supplier Updated!");
-            alert.setContentText("Supplier is updated successfully");
+            alert.setTitle(rb.getString("successfull"));
+            alert.setHeaderText(rb.getString("SupplierUpdated"));
+            alert.setContentText(rb.getString("SupplierUpSucc"));
             alert.showAndWait();
         }
     }
@@ -97,23 +97,23 @@ public class EditController implements Initializable, SupplierInterface {
         String errorMessage = "";
 
         if (supplierField.getText() == null || supplierField.getText().length() == 0) {
-            errorMessage += "No valid first name!\n";
+            errorMessage += rb.getString("noFName") + "\n";
         }
 
         if (phoneField.getText() == null || phoneField.getText().length() == 0) {
-            errorMessage += "No valid phone number!\n";
+            errorMessage += rb.getString("NoPhone") + "\n";
         }
 
         if (addressArea.getText() == null || addressArea.getText().length() == 0) {
-            errorMessage += "No email address!\n";
+            errorMessage += rb.getString("noEmailAddress") + "\n";
         }
 
         if (errorMessage.length() == 0) {
             return true;
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
+            alert.setTitle(rb.getString("invalidF"));
+            alert.setHeaderText(rb.getString("correctInvalidF"));
             alert.setContentText(errorMessage);
             alert.showAndWait();
 

@@ -75,12 +75,13 @@ public class ProductController implements Initializable, ProductInterface {
     private VBox drawer;
 
     private SalesModel salesModel;
-
+    private ResourceBundle rb;;
     // lue categoryControllien kommentit ovat samanliaset
     // mutta muutettu vain Category product ja joitan muita pieniä muutoksia GUI hin
     // 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle rb) {
+        this.rb = rb;
         model = new ProductModel();
         salesModel = new SalesModel();
         drawerAction();
@@ -160,49 +161,50 @@ public class ProductController implements Initializable, ProductInterface {
         PRODUCTLIST.addAll(model.getProducts());
     }
 
-
+  // valikkomenun buttoneiden actionit
     @FXML
     public void adminAction(ActionEvent event) throws Exception {
-        windows("/fxml/Admin.fxml", "Admin", event);
+        windows("/fxml/Admin.fxml", rb.getString("administrator"), event, rb);
     }
 
     @FXML
     public void categoryAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Category.fxml", "Category", event);
+        windows("/fxml/Category.fxml", rb.getString("category"), event, rb);
     }
 
     @FXML
     public void purchaseAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Purchase.fxml", "Purchase", event);
+        windows("/fxml/Purchase.fxml", rb.getString("purchase"), event, rb);
     }
 
     @FXML
     public void salesAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Sales.fxml", "Sales", event);
+        windows("/fxml/Sales.fxml", rb.getString("sales"), event, rb);
     }
 
     @FXML
     public void reportAction(ActionEvent event) throws Exception {
-        windows("/fxml/Report.fxml", "Report", event);
+        windows("/fxml/Report.fxml", rb.getString("report"), event, rb);
     }
 
     @FXML
     public void supplierAction(ActionEvent event) throws Exception {
-        windows("/fxml/Supplier.fxml", "Supplier", event);
+        windows("/fxml/Supplier.fxml", rb.getString("supplier"), event, rb);
     }
 
     @FXML
     public void staffAction(ActionEvent event) throws Exception {
-        windows("/fxml/Employee.fxml", "Employee", event);
+        windows("/fxml/Employee.fxml", rb.getString("staff"), event, rb);
     }
 
+    
     @FXML
     public void logoutAction(ActionEvent event) throws Exception {
         ((Node) (event.getSource())).getScene().getWindow().hide();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"), rb);
         Stage stage = new Stage();
         root.setOnMousePressed((MouseEvent e) -> {
             xOffset = e.getSceneX();
@@ -213,18 +215,18 @@ public class ProductController implements Initializable, ProductInterface {
             stage.setY(e.getScreenY() - yOffset);
         });
         Scene scene = new Scene(root);
-        stage.setTitle("Inventory:: Version 1.0");
+        stage.setTitle(rb.getString("v1"));
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
     }
 
-    private void windows(String path, String title, ActionEvent event) throws Exception {
+    private void windows(String path, String title, ActionEvent event, ResourceBundle rb) throws Exception {
 
         double width = ((Node) event.getSource()).getScene().getWidth();
         double height = ((Node) event.getSource()).getScene().getHeight();
 
-        Parent root = FXMLLoader.load(getClass().getResource(path));
+        Parent root = FXMLLoader.load(getClass().getResource(path), rb);
         Scene scene = new Scene(root, width, height);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle(title);
@@ -234,7 +236,7 @@ public class ProductController implements Initializable, ProductInterface {
 
     @FXML
     public void addAction(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/product/Add.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/product/Add.fxml"), rb);
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         root.setOnMousePressed((MouseEvent e) -> {
@@ -246,7 +248,7 @@ public class ProductController implements Initializable, ProductInterface {
             stage.setY(e.getScreenY() - yOffset);
         });
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("New Product");
+        stage.setTitle(rb.getString("NewProd"));
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
@@ -257,14 +259,14 @@ public class ProductController implements Initializable, ProductInterface {
 
         Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
         int selectedProductId = productTable.getSelectionModel().getSelectedIndex();
-        FXMLLoader loader = new FXMLLoader((getClass().getResource("/fxml/product/Edit.fxml")));
+        FXMLLoader loader = new FXMLLoader((getClass().getResource("/fxml/product/Edit.fxml")), rb);
         EditController controller = new EditController();
         loader.setController(controller);
         Parent root = loader.load();
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Edit Product");
+        stage.setTitle(rb.getString("EditProd"));
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
@@ -276,9 +278,9 @@ public class ProductController implements Initializable, ProductInterface {
     public void deleteAction(ActionEvent event) {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Delete");
-        alert.setHeaderText("Delete Product");
-        alert.setContentText("Are you sure?");
+        alert.setTitle(rb.getString("delete"));
+        alert.setHeaderText(rb.getString("deleteProd"));
+        alert.setContentText(rb.getString("confirmation"));
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {

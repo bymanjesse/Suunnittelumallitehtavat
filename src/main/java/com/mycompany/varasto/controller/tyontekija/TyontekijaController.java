@@ -71,9 +71,10 @@ public class TyontekijaController implements Initializable, ProductInterface {
 
     private double xOffset = 0;
     private double yOffset = 0;
-
+    private ResourceBundle rb;
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle rb) {
+        this.rb = rb;
         // luodaan listat ja täytetään listat datalla ja cellValueilla ikkunan avauksen yhteydessä
         // 
         ITEMLIST = FXCollections.observableArrayList();
@@ -152,7 +153,7 @@ public class TyontekijaController implements Initializable, ProductInterface {
                 quantityField.setEditable(false);
                quantityField.setStyle("-fx-background-color: red;");
             }
-            quantityLabel.setText("Stock: " + String.valueOf(quantity));
+            quantityLabel.setText(rb.getString("Stock") + String.valueOf(quantity));
             descriptionArea.setText(product.getDescription());
         } else {
             productField.setText("");
@@ -175,7 +176,7 @@ public class TyontekijaController implements Initializable, ProductInterface {
         priceField.setText("");
         quantityField.setText("");
         resetQuantityField();
-        quantityLabel.setText("Available: ");
+        quantityLabel.setText(rb.getString("Available"));
         descriptionArea.setText("");
     }
 
@@ -258,7 +259,7 @@ public class TyontekijaController implements Initializable, ProductInterface {
         // haetaan tavarat listasta 
         ObservableList<Item> sold = listTableView.getItems();
         // ladataan laskunäkymä jossa näkyy tuotteiden hinta ja johon työntekijä laittaa maksetun summan
-        FXMLLoader loader = new FXMLLoader((getClass().getResource("/fxml/Lasku.fxml")));
+        FXMLLoader loader = new FXMLLoader((getClass().getResource("/fxml/Lasku.fxml")), rb);
         // asetetaan fxml tiedostolle controlleri ja ladataan ikkuna
         LaskuController controller = new LaskuController();
         loader.setController(controller);
@@ -304,14 +305,14 @@ public class TyontekijaController implements Initializable, ProductInterface {
         String errorMessage = "";
 
         if (quantityField.getText() == null || quantityField.getText().length() == 0) {
-            errorMessage += "Quantity not supplied!\n";
+            errorMessage += rb.getString("QuantnotSupplied") + "\n";
         } else {
             double quantity = Double.parseDouble(quantityField.getText());
             String available = quantityLabel.getText();
             double availableQuantity = Double.parseDouble(available.substring(7));
 
             if (quantity > availableQuantity) {
-                errorMessage += "Out of Stock!\n";
+                errorMessage += rb.getString("outOfStock") + "\n";
             }
         }
 
@@ -319,8 +320,8 @@ public class TyontekijaController implements Initializable, ProductInterface {
             return true;
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning");
-            alert.setHeaderText("Please input the valid number of products");
+            alert.setTitle(rb.getString("warn"));
+            alert.setHeaderText(rb.getString("validnumberProd"));
             alert.setContentText(errorMessage);
             alert.showAndWait();
             quantityField.setText("");
@@ -332,7 +333,7 @@ public class TyontekijaController implements Initializable, ProductInterface {
     @FXML
     public void logoutAction(ActionEvent event) throws Exception {
         ((Node) (event.getSource())).getScene().getWindow().hide();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"), rb);
         Stage stage = new Stage();
         root.setOnMousePressed((MouseEvent e) -> {
             xOffset = e.getSceneX();
@@ -344,7 +345,7 @@ public class TyontekijaController implements Initializable, ProductInterface {
         });
 
         Scene scene = new Scene(root);
-        stage.setTitle("Inventory:: Version 1.0");
+        stage.setTitle(rb.getString("v1"));
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();

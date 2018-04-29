@@ -17,16 +17,16 @@
                <children>
                   <Pane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="340.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button fx:id="menu" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" styleClass="menu-button" text="Menu" textAlignment="CENTER">
+                        <Button fx:id="menu" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" styleClass="menu-button" text="%menu" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font></Button>
-                        <Button layoutX="90.0" layoutY="15.0" mnemonicParsing="false" onAction="#logoutAction" prefHeight="40.0" prefWidth="82.0" text="Logout" />
+                        <Button layoutX="90.0" layoutY="15.0" mnemonicParsing="false" onAction="#logoutAction" prefHeight="40.0" prefWidth="82.0" text="%logout" />
                      </children>
                   </Pane>
                   <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="200.0" HBox.hgrow="NEVER">
                      <children>
-                        <TextField fx:id="searchField" layoutX="15.0" layoutY="20.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="170.0" promptText="Search" styleClass="search-field" />
+                        <TextField fx:id="searchField" layoutX="15.0" layoutY="20.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="170.0" promptText="%search" styleClass="search-field" />
                         <Separator layoutX="15.0" layoutY="51.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="170.0" valignment="BOTTOM" />
                      </children>
                   </Pane>
@@ -57,12 +57,12 @@
                         </HBox>
                         <TableView fx:id="productTable" minHeight="-Infinity" minWidth="-Infinity" prefHeight="205.0" prefWidth="740.0" VBox.vgrow="ALWAYS">
                           <columns>
-                            <TableColumn fx:id="idColumn" prefWidth="75.0" text="Id" />
-                            <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="Category" />
-                              <TableColumn fx:id="supplierColumn" prefWidth="75.0" text="Supplier" />
-                              <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
-                              <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
-                              <TableColumn fx:id="quantityColumn" prefWidth="75.0" text="Quantity" />
+                            <TableColumn fx:id="idColumn" prefWidth="75.0" text="%id" />
+                            <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="%category" />
+                              <TableColumn fx:id="supplierColumn" prefWidth="75.0" text="%supplier" />
+                              <TableColumn fx:id="nameColumn" prefWidth="75.0" text="%name" />
+                              <TableColumn fx:id="priceColumn" prefWidth="75.0" text="%price" />
+                              <TableColumn fx:id="quantityColumn" prefWidth="75.0" text="%quantity" />
                               <TableColumn fx:id="descriptionColumn" prefWidth="75.0" text="Description" />
                           </columns>
                            <columnResizePolicy>
@@ -74,9 +74,9 @@
                         </TableView>
                         <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="760.0" spacing="10.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#addAction" prefHeight="25.0" prefWidth="70.0" text="Add" />
-                              <Button fx:id="editButton" mnemonicParsing="false" onAction="#editAction" prefHeight="25.0" prefWidth="70.0" text="Edit" />
-                              <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteAction" prefHeight="25.0" prefWidth="70.0" text="Delete">
+                              <Button mnemonicParsing="false" onAction="#addAction" prefHeight="25.0" prefWidth="70.0" text="%add" />
+                              <Button fx:id="editButton" mnemonicParsing="false" onAction="#editAction" prefHeight="25.0" prefWidth="70.0" text="%edit" />
+                              <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteAction" prefHeight="25.0" prefWidth="70.0" text="%delete">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
@@ -92,19 +92,19 @@
             </HBox>
             <VBox fx:id="drawer" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="200.0" styleClass="sidebar-menu" translateX="-200.0">
                <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#adminAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Administrator" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="Product">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#adminAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="%administrator" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="%product">
                      <styleClass>
                         <String fx:value="menu-buttons" />
                         <String fx:value="menu-buttons-selected" />
                      </styleClass>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#categoryAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Category" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#supplierAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Supplier" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#purchaseAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Purchase" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#salesAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Sales" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#staffAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Staff" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#reportAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Report" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#categoryAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="%category" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#supplierAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="%supplier" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#purchaseAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="%purchase" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#salesAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="%sales" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#staffAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="%staff" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#reportAction" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="%report" />
                </children>
             </VBox>
          </children>

@@ -61,13 +61,14 @@ public class SalesController implements Initializable, SaleInterface {
     private Button menu;
     @FXML
     private VBox drawer;
-
+    private ResourceBundle rb;
     
     // lue categoryControllien kommentit ovat samanliaset
     // mutta muutettu vain Category saleksi ja joitan muita pieniä muutoksia GUI hin
     // hakee siis kaikki salet tietokannasta ja näyttää ne kaikki GUI ssa. en jaksa nyt kaikkiin samoja kommentteja tehd. Kaikki luokat hyvin samanlaisia
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle rb) {
+        this.rb=rb;
         model = new SalesModel();
         
         drawerAction();
@@ -142,50 +143,47 @@ public class SalesController implements Initializable, SaleInterface {
             }
         });
     }
-
-    
-    @FXML
+      @FXML
     public void adminAction(ActionEvent event) throws Exception {
-        windows("/fxml/Admin.fxml", "Admin", event);
+        windows("/fxml/Admin.fxml", rb.getString("administrator"), event, rb);
     }
     
     @FXML
     public void productAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Product.fxml", "Product", event);
+        windows("/fxml/Product.fxml", rb.getString("product"), event, rb);
     }
     
     @FXML
     public void categoryAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Category.fxml", "Category", event);
+        windows("/fxml/Category.fxml", rb.getString("category"), event, rb);
     }
 
     @FXML
     public void purchaseAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Purchase.fxml", "Purchase", event);
+        windows("/fxml/Purchase.fxml", rb.getString("purchase"), event, rb);
     }
     
     @FXML
     public void reportAction(ActionEvent event) throws Exception {
-        windows("/fxml/Report.fxml", "Report", event);
+        windows("/fxml/Report.fxml", rb.getString("report"), event, rb);
     }
 
     @FXML
     public void supplierAction(ActionEvent event) throws Exception {
-        windows("/fxml/Supplier.fxml", "Supplier", event);
+        windows("/fxml/Supplier.fxml", rb.getString("supplier"), event, rb);
     }
     
     @FXML
     public void staffAction(ActionEvent event) throws Exception {
-        windows("/fxml/Employee.fxml", "Employee", event);
+        windows("/fxml/Employee.fxml", rb.getString("staff"), event, rb);
     }
-
     @FXML
     public void logoutAction(ActionEvent event) throws Exception {
         ((Node) (event.getSource())).getScene().getWindow().hide();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"), rb);
         Stage stage = new Stage();
         root.setOnMousePressed((MouseEvent e) -> {
             xOffset = e.getSceneX();
@@ -196,19 +194,19 @@ public class SalesController implements Initializable, SaleInterface {
             stage.setY(e.getScreenY() - yOffset);
         });
         Scene scene = new Scene(root);
-        stage.setTitle("Inventory:: Version 1.0");
+        stage.setTitle(rb.getString("v1"));
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
 
     }
 
-    private void windows(String path, String title, ActionEvent event) throws Exception {
+    private void windows(String path, String title, ActionEvent event, ResourceBundle rb) throws Exception {
 
         double width = ((Node) event.getSource()).getScene().getWidth();
         double height = ((Node) event.getSource()).getScene().getHeight();
 
-        Parent root = FXMLLoader.load(getClass().getResource(path));
+        Parent root = FXMLLoader.load(getClass().getResource(path), rb);
         Scene scene = new Scene(root, width, height);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle(title);

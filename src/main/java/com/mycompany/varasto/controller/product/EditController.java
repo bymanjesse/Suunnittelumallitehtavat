@@ -47,10 +47,11 @@ public class EditController implements Initializable, ProductInterface {
     private SupplierModel supplierModel;
     private Product product;
     private long selectedProductId;
-    
+    private ResourceBundle rb;
     // initialisointi
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle rb) {
+        this.rb = rb;
         productModel = new ProductModel();
         categoryModel = new CategoryModel();
         supplierModel = new SupplierModel();
@@ -102,9 +103,9 @@ public class EditController implements Initializable, ProductInterface {
             ((Stage) saveButton.getScene().getWindow()).close();
             // ilmoitus onnistumisesta
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Successful");
-            alert.setHeaderText("Product Updated!");
-            alert.setContentText("Product is updated successfully");
+            alert.setTitle(rb.getString("successful"));
+            alert.setHeaderText(rb.getString("ProdUp"));
+            alert.setContentText(rb.getString("prodSuc"));
             alert.showAndWait();
         }
     }
@@ -129,31 +130,31 @@ public class EditController implements Initializable, ProductInterface {
         String errorMessage = "";
 
         if (nameField.getText() == null || nameField.getText().length() == 0) {
-            errorMessage += "No valid name!\n";
+            errorMessage += rb.getString("noProdName") + "\n";
         }
 
         if (priceField.getText() == null || priceField.getText().length() == 0) {
-            errorMessage += "No valid price!\n";
+            errorMessage += rb.getString("NoProdPrice") + "\n";
         }
 
         if (quantityField.getText() == null || quantityField.getText().length() == 0) {
-            errorMessage += "No valid quantity!\n";
+            errorMessage += rb.getString("NoProdQuan") + "\n";
         }
 
         if (descriptionArea.getText() == null || descriptionArea.getText().length() == 0) {
-            errorMessage += "No email description!\n";
+            errorMessage += rb.getString("NoProdDes") + "\n";
         }
 
         if (categoryBox.getSelectionModel().isEmpty()) {
-            errorMessage += "Please select the category!\n";
+            errorMessage += rb.getString("NoProdCat") + "\n";
         }
 
         if (errorMessage.length() == 0) {
             return true;
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
+            alert.setTitle(rb.getString("invalidF"));
+            alert.setHeaderText(rb.getString("correctInvalidF"));
             alert.setContentText(errorMessage);
             alert.showAndWait();
 

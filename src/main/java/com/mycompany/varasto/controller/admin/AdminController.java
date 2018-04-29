@@ -13,7 +13,6 @@ package com.mycompany.varasto.controller.admin;
 import com.mycompany.varasto.entity.Product;
 import com.mycompany.varasto.model.ProductModel;
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
@@ -54,14 +53,14 @@ public class AdminController implements Initializable {
     @FXML
     CategoryAxis pxAxis;
     
-    ResourceBundle messages;
+    private ResourceBundle rb;
     private ProductModel productModel;
 
     @Override
     public void initialize(URL location, ResourceBundle rb) {
 
         productModel = new ProductModel();
-        messages = ResourceBundle.getBundle("MessageBundle_fi_FI", new Locale("fi", "FI"));
+        this.rb = rb;
         // luodaan charttit admin ruutuun 
         drawerAction();
         loadProductsChart();
@@ -109,47 +108,47 @@ public class AdminController implements Initializable {
     @FXML
     public void productAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Product.fxml", "Product", event);
+        windows("/fxml/Product.fxml", rb.getString("product"), event, rb);
     }
 
     @FXML
     public void categoryAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Category.fxml", "Category", event);
+        windows("/fxml/Category.fxml", rb.getString("category"), event, rb);
     }
 
     @FXML
     public void purchaseAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Purchase.fxml", "Purchase", event);
+        windows("/fxml/Purchase.fxml", rb.getString("purchase"), event, rb);
     }
 
     @FXML
     public void salesAction(ActionEvent event) throws Exception {
 
-        windows("/fxml/Sales.fxml", "Sales", event);
+        windows("/fxml/Sales.fxml", rb.getString("sales"), event, rb);
     }
 
     @FXML
     public void supplierAction(ActionEvent event) throws Exception {
-        windows("/fxml/Supplier.fxml", "Supplier", event);
+        windows("/fxml/Supplier.fxml", rb.getString("supplier"), event, rb);
     }
 
     @FXML
     public void reportAction(ActionEvent event) throws Exception {
-        windows("/fxml/Report.fxml", "Report", event);
+        windows("/fxml/Report.fxml", rb.getString("report"), event, rb);
     }
 
     @FXML
     public void staffAction(ActionEvent event) throws Exception {
-        windows("/fxml/Employee.fxml", "Employee", event);
+        windows("/fxml/Employee.fxml", rb.getString("staff"), event, rb);
     }
     // logout nappin toiminnallisus
     // vie login screeniin
     @FXML
     public void logoutAction(ActionEvent event) throws Exception {
         ((Node) (event.getSource())).getScene().getWindow().hide();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"), rb);
         Stage stage = new Stage();
         root.setOnMousePressed((MouseEvent e) -> {
             xOffset = e.getSceneX();
@@ -166,12 +165,12 @@ public class AdminController implements Initializable {
         stage.show();
     }
         // methodi jolla ladataan uusi ikkuna
-    private void windows(String path, String title, ActionEvent event) throws Exception {
+    private void windows(String path, String title, ActionEvent event, ResourceBundle rb ) throws Exception {
 
         double width = ((Node) event.getSource()).getScene().getWidth();
         double height = ((Node) event.getSource()).getScene().getHeight();
 
-        Parent root = FXMLLoader.load(getClass().getResource(path));
+        Parent root = FXMLLoader.load(getClass().getResource(path), rb);
         Scene scene = new Scene(root, width, height);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle(title);

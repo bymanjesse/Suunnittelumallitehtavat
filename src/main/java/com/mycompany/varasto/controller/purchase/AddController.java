@@ -42,9 +42,11 @@ public class AddController implements Initializable, PurchaseInterface {
     private ProductModel productModel;
     private SupplierModel supplierModel;
     private PurchaseModel purchaseModel;
+    private ResourceBundle rb;
     // initialisointi
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle rb) {
+        this.rb = rb;
         productModel = new ProductModel();
         supplierModel = new SupplierModel();
         purchaseModel = new PurchaseModel();
@@ -85,9 +87,9 @@ public class AddController implements Initializable, PurchaseInterface {
             ((Stage) saveButton.getScene().getWindow()).close();
             // ilmoitus onnistumisesta
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Successful");
-            alert.setHeaderText("Purchase Completed");
-            alert.setContentText("Product is added successfully");
+            alert.setTitle(rb.getString("successfull"));
+            alert.setHeaderText(rb.getString("PurchComp"));
+            alert.setContentText(rb.getString("prodAddSucc"));
             alert.showAndWait();
         }
     }
@@ -105,27 +107,27 @@ public class AddController implements Initializable, PurchaseInterface {
         String errorMessage = "";
 
         if (priceField.getText() == null || priceField.getText().length() == 0) {
-            errorMessage += "No valid price!\n";
+            errorMessage += rb.getString("NoProdPrice") + "\n";
         }
 
         if (quantityField.getText() == null || quantityField.getText().length() == 0) {
-            errorMessage += "No valid quantity!\n";
+            errorMessage += rb.getString("NoProdQuan") + "\n";
         }
 
         if (productBox.getSelectionModel().isEmpty()) {
-            errorMessage += "Please select the product!\n";
+            errorMessage += rb.getString("NoProdDes") + "\n";
         }
 
         if (supplierBox.getSelectionModel().isEmpty()) {
-            errorMessage += "Please select the supplier!\n";
+            errorMessage += rb.getString("NoProdSup") + "\n";
         }
 
         if (errorMessage.length() == 0) {
             return true;
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
+            alert.setTitle(rb.getString("invalidF"));
+            alert.setHeaderText(rb.getString("correctInvalidF"));
             alert.setContentText(errorMessage);
             alert.showAndWait();
 
