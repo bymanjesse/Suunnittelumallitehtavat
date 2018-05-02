@@ -41,7 +41,7 @@ public class LoginController implements Initializable {
     private Label errorLabel;
     private Label signin;
     private EmployeeModel model;
-    ResourceBundle rb;
+    private ResourceBundle rb;
     
     
     @Override
@@ -120,7 +120,7 @@ public class LoginController implements Initializable {
     }
     // käytetään ikkunan avaamiseen
     private void windows(String path, String title, ResourceBundle rb) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource(path), rb);
+        Parent root = FXMLLoader.load(getClass().getResource(path), rb);        
         Stage stage = new Stage();
         Scene scene = new Scene(root);
         stage.setTitle(title);
@@ -153,21 +153,22 @@ public class LoginController implements Initializable {
         Locale currentlocale;
         String language ="es";
         String country ="BO";
-        
+        this.rb.clearCache();
         currentlocale = new Locale(language, country);
         
         this.rb = ResourceBundle.getBundle("MessageBundle_es_BO" , currentlocale);
-        
+        windows("/fxml/Login.fxml","testi",rb);
     }
         @FXML
     public void ENaction(ActionEvent event)throws Exception{
         Locale currentlocale;
         String language ="en";
         String country ="EN";
+        this.rb.clearCache();
         
         currentlocale = new Locale(language, country);
         this.rb = ResourceBundle.getBundle("MessageBundle_en_EN" , currentlocale);
-        
+        windows("/fxml/Login.fxml","testi",rb);
     }
 
     private boolean validateInput() {
